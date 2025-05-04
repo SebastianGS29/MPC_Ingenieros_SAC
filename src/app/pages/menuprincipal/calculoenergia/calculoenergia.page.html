@@ -1,13 +1,36 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>calculoenergia</ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-header title="Cálculo de energía"></app-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">calculoenergia</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content class="ion-padding">
+
+  <!-- Botón para abrir modal -->
+  <div class="grid-equipos">
+    <div
+      class="equipo-card"
+      *ngFor="let equipo of equipos"
+      (click)="abrirModalConEquipo(equipo)"
+    >
+      <img [src]="equipo.imagen" alt="{{ equipo.nombre }}" />
+      <p>{{ equipo.nombre }}</p>
+    </div>
+  </div>
+
+  <!-- Lista de equipos agregados -->
+  <ion-list *ngIf="equiposAgregados.length > 0">
+    <ion-card *ngFor="let eq of equiposAgregados">
+      <ion-card-header>
+        <ion-card-title>{{ eq.nombre }}</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <p><strong>KWh:</strong> {{ eq.kwh }}</p>
+        <p><strong>KWh/mes:</strong> {{ eq.kwhMes }}</p>
+        <p><strong>Costo aprox.:</strong> S/ {{ eq.costo }}</p>
+      </ion-card-content>
+    </ion-card>
+  </ion-list>
+
+  <!-- Mensaje si no hay equipos -->
+  <ion-text *ngIf="equiposAgregados.length === 0" color="medium">
+    No se ha agregado ningún equipo aún.
+  </ion-text>
+
 </ion-content>

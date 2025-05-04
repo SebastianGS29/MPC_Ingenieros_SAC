@@ -5,24 +5,30 @@ import { CustomInputComponent } from './comoponents/custom-input/custom-input.co
 import { LogoComponent } from './comoponents/logo/logo.component';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { FormularioModalModule } from './comoponents/formulario-modal/formulario-modal.module';
 
 @NgModule({
   declarations: [
     HeaderComponent,
     CustomInputComponent,
-    LogoComponent
+    LogoComponent,
+    // REMUEVE FormularioModalComponent de aquí
   ],
-  exports:[
+  exports: [
     HeaderComponent,
     CustomInputComponent,
-    LogoComponent
+    LogoComponent,
+    // REMUEVE FormularioModalComponent de aquí
+    FormularioModalModule // Exporta el módulo completo
   ],
   imports: [
     CommonModule,
     IonicModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    FormularioModalModule, // Importa el módulo completo
+    // REMUEVE FormularioModalComponent de aquí
   ]
 })
+
 export class SharedModule { }

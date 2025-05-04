@@ -1,0 +1,27 @@
+.grid-equipos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 16px;
+    margin-bottom: 1rem;
+  }
+  
+  .equipo-card {
+    text-align: center;
+    border-radius: 10px;
+    background: #f5f5f5;
+    padding: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+  
+  .equipo-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .equipo-card img {
+    width: 80px;
+    height: auto;
+    margin-bottom: 8px;
+  }
+  

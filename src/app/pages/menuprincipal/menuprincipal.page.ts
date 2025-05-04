@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-menuprincipal',
@@ -9,12 +9,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 })
 export class MenuprincipalPage implements OnInit {
 
-  form = new FormGroup({
-    voltaje: new FormControl('',[Validators.required]),
-    amperaje: new FormControl('',[Validators.required]),
-    consumo_KWH: new FormControl('',[Validators.required])
-  })
-
+ 
   constructor() { }
 
   ngOnInit() {
