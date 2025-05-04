@@ -33,3 +33,18 @@
     <p><strong>Resultado:</strong> {{ resultado }} kWh</p>
   </div>
 </ion-content>
+
+  <div class="ion-page" id="main-content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Menu</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <p>Tap a button below to open a specific menu.</p>
+
+    <ion-button expand="block" (click)="openFirstMenu()">Voltaje</ion-button>
+    <ion-button expand="block" (click)="openSecondMenu()">Amperaje</ion-button>
+    <ion-button expand="block" (click)="openEndMenu()">Consumo de KWH en el hogar</ion-button>
+  </ion-content>
+</div>
