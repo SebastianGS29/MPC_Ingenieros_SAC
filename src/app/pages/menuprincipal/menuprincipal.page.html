@@ -1,1 +1,35 @@
+<app-header title="Menu principal"></app-header>
+<ion-content>
 
+<ion-content class="ion-padding">
+  <h2 class="titulo">CONSUMO DE ENERGÍA</h2>
+  <p class="descripcion">
+    -----
+  </p>
+
+  <form [formGroup]="form">
+    <ion-item>
+      <ion-label position="floating">Voltaje</ion-label>
+      <ion-input type="number" formControlName="voltaje"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Amperaje</ion-label>
+      <ion-input type="number" formControlName="amperaje"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Consumo KWH en el hogar</ion-label>
+      <ion-input type="number" formControlName="consumo_KWH"></ion-input>
+    </ion-item>
+  </form>
+
+  <div class="botones">
+    <ion-button color="success" (click)="calcular()" [disabled]="form.invalid">Calcular</ion-button>
+    <ion-button color="dark" (click)="reset()">Reset</ion-button>
+  </div>
+
+  <div *ngIf="resultado !== null" class="resultado">
+    <p><strong>Resultado:</strong> {{ resultado }} kWh</p>
+  </div>
+</ion-content>
