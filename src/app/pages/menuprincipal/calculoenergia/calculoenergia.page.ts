@@ -22,7 +22,6 @@ export class CalculoenergiaPage implements OnInit {
     { nombre: 'Licuadora', imagen: 'assets/img/licuadora.png', potencia: 300 },
     { nombre: 'Refrigeradora', imagen: 'assets/img/refrigeradora.png', potencia: 800 },
     { nombre: 'Microondas', imagen: 'assets/img/microondas.png', potencia: 1200 },
-    
     // agrega más equipos
   ];
 
