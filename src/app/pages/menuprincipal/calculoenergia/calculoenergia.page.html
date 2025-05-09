@@ -1,18 +1,29 @@
 <app-header title="Cálculo de energía"></app-header>
-
+<button id="fallback-focus" style="position: absolute; left: -9999px;" tabindex="-1">Fallback</button>
 <ion-content class="ion-padding">
+  
+<!-- Imagen dinámica del ambiente -->
+<div class="imagen-ambiente-container">
+  <img [src]="imagenAmbiente" alt="Imagen del ambiente" class="imagen-ambiente" />
+</div>
 
-  <!-- Botón para abrir modal -->
-  <div class="grid-equipos">
-    <div
-      class="equipo-card"
-      *ngFor="let equipo of equipos"
-      (click)="abrirModalConEquipo(equipo)"
-    >
-      <img [src]="equipo.imagen" alt="{{ equipo.nombre }}" />
-      <p>{{ equipo.nombre }}</p>
-    </div>
-  </div>
+  <!-- Select de ambiente -->
+  <ion-item>
+    <ion-label>Ambiente</ion-label>
+    <ion-select [(ngModel)]="ambienteSeleccionado">
+      <ion-select-option *ngFor="let amb of ambientes" [value]="amb">{{ amb }}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <!-- Select de equipos -->
+  <ion-item>
+    <ion-label>Equipo</ion-label>
+    <ion-select placeholder="Selecciona un equipo" (ionChange)="abrirModalConEquipo($event.detail.value)">
+      <ion-select-option *ngFor="let eq of equipos" [value]="eq">
+        {{ eq.nombre }} ({{ eq.potencia }} W)
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
 
   <!-- Lista de equipos agregados -->
   <ion-list *ngIf="equiposAgregados.length > 0">

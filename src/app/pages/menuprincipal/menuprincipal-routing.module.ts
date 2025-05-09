@@ -12,7 +12,9 @@ const routes: Routes = [
   {
     path: 'calculoenergia',
     loadChildren: () => import('./calculoenergia/calculoenergia.module').then( m => m.CalculoenergiaPageModule)
-  }
+  },
+ 
+
 
 ];
 

@@ -12,6 +12,8 @@ const routes: Routes = [
     path: 'menuprincipal',
     loadChildren: () => import('./pages/menuprincipal/menuprincipal.module').then( m => m.MenuprincipalPageModule)
   },
+
+
   
 ];
 
