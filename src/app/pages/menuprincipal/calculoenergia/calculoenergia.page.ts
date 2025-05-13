@@ -55,6 +55,7 @@ export class CalculoenergiaPage implements OnInit {
   async abrirModalConEquipo(equipo: any) {
     const modal = await this.modalCtrl.create({
       component: FormularioModalComponent,
+      
       componentProps: {
         equipo: equipo.nombre,
         potencia: equipo.potencia
@@ -71,7 +72,7 @@ export class CalculoenergiaPage implements OnInit {
   }
 
   procesarEquipo(equipoCalculado: any) {
-    const horasTotal = equipoCalculado.horas + (equipoCalculado.minutos / 60);
+    const horasTotal = equipoCalculado.horas;
     const consumo = (equipoCalculado.potencia * equipoCalculado.cantidad * horasTotal * equipoCalculado.dias) / 1000;
 
     const item = {

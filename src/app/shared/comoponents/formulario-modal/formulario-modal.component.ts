@@ -23,7 +23,6 @@ export class FormularioModalComponent implements OnInit {
       cantidad: [1, [Validators.required, Validators.min(1), Validators.max(10)]],
       potencia: [0, [Validators.required, Validators.min(0), Validators.max(15000)]],
       horas: [1, [Validators.required, Validators.min(1), Validators.max(24)]],
-      minutos: [0, [Validators.required, Validators.min(0), Validators.max(59)]],
       dias: [1, [Validators.required, Validators.min(1), Validators.max(30)]],
     });
   }

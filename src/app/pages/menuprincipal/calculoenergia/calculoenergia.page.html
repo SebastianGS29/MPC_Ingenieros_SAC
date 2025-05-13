@@ -2,12 +2,12 @@
 <button id="fallback-focus" style="position: absolute; left: -9999px;" tabindex="-1">Fallback</button>
 <ion-content class="ion-padding">
   
-<!-- Imagen dinámica del ambiente -->
+<!-- Imagen dinámica del ambiente dinamico -->
 <div class="imagen-ambiente-container">
   <img [src]="imagenAmbiente" alt="Imagen del ambiente" class="imagen-ambiente" />
 </div>
 
-  <!-- Select de ambiente -->
+  <!-- Select de ambientes dinamico -->
   <ion-item>
     <ion-label>Ambiente</ion-label>
     <ion-select [(ngModel)]="ambienteSeleccionado">
@@ -15,7 +15,7 @@
     </ion-select>
   </ion-item>
 
-  <!-- Select de equipos -->
+  <!-- Select de equipos dinamico desde back -->
   <ion-item>
     <ion-label>Equipo</ion-label>
     <ion-select placeholder="Selecciona un equipo" (ionChange)="abrirModalConEquipo($event.detail.value)">
@@ -25,7 +25,7 @@
     </ion-select>
   </ion-item>
 
-  <!-- Lista de equipos agregados -->
+  <!-- Lista de equipos agregados dinamico desde back-->
   <ion-list *ngIf="equiposAgregados.length > 0">
     <ion-card *ngFor="let eq of equiposAgregados">
       <ion-card-header>
@@ -39,7 +39,7 @@
     </ion-card>
   </ion-list>
 
-  <!-- Mensaje si no hay equipos -->
+  <!-- si no hay equipos -->
   <ion-text *ngIf="equiposAgregados.length === 0" color="medium">
     No se ha agregado ningún equipo aún.
   </ion-text>
