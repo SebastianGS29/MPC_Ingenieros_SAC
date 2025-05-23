@@ -15,7 +15,7 @@ export class CalculoenergiaPage implements OnInit {
   ambientes: Ambiente[] = ['Doméstico', 'Residencial', 'Industrial'];
   ambienteSeleccionado: Ambiente = 'Doméstico';
   equiposAgregados: any[] = [];
-  
+
   get imagenAmbiente(): string {
     switch (this.ambienteSeleccionado) {
       case 'Doméstico':
@@ -28,7 +28,7 @@ export class CalculoenergiaPage implements OnInit {
         return '';
     }
   }
-  
+
   todosLosEquipos: Record<Ambiente, { nombre: string; potencia: number }[]> = {
     Doméstico: [
       { nombre: 'Licuadora', potencia: 300 },
@@ -55,7 +55,6 @@ export class CalculoenergiaPage implements OnInit {
   async abrirModalConEquipo(equipo: any) {
     const modal = await this.modalCtrl.create({
       component: FormularioModalComponent,
-      
       componentProps: {
         equipo: equipo.nombre,
         potencia: equipo.potencia
@@ -72,16 +71,63 @@ export class CalculoenergiaPage implements OnInit {
   }
 
   procesarEquipo(equipoCalculado: any) {
-    const horasTotal = equipoCalculado.horas;
-    const consumo = (equipoCalculado.potencia * equipoCalculado.cantidad * horasTotal * equipoCalculado.dias) / 1000;
+    const consumo = (equipoCalculado.potencia * equipoCalculado.cantidad * equipoCalculado.horas * equipoCalculado.dias) / 1000;
 
     const item = {
       nombre: equipoCalculado.equipo,
+      potencia: equipoCalculado.potencia,
+      cantidad: equipoCalculado.cantidad,
+      horas: equipoCalculado.horas,
+      dias: equipoCalculado.dias,
       kwh: consumo.toFixed(2),
       kwhMes: (consumo * 1).toFixed(2),
       costo: (consumo * 0.67).toFixed(2)
     };
 
     this.equiposAgregados.push(item);
+  }
+
+  async editarEquipo(index: number) {
+    const equipo = this.equiposAgregados[index];
+
+    const modal = await this.modalCtrl.create({
+      component: FormularioModalComponent,
+      componentProps: {
+        equipo: equipo.nombre,
+        potencia: equipo.potencia,
+        cantidad: equipo.cantidad,
+        horas: equipo.horas,
+        dias: equipo.dias
+      }
+    });
+
+    modal.onDidDismiss().then((result) => {
+      if (result.data) {
+        const actualizado = result.data;
+        const consumo = (actualizado.potencia * actualizado.cantidad * actualizado.horas * actualizado.dias) / 1000;
+
+        this.equiposAgregados[index] = {
+          nombre: actualizado.equipo,
+          potencia: actualizado.potencia,
+          cantidad: actualizado.cantidad,
+          horas: actualizado.horas,
+          dias: actualizado.dias,
+          kwh: consumo.toFixed(2),
+          kwhMes: (consumo * 1).toFixed(2),
+          costo: (consumo * 0.67).toFixed(2)
+        };
+      }
+    });
+
+    return await modal.present();
+  }
+  
+get costoTotal(): string {
+  const total = this.equiposAgregados.reduce((sum, eq) => sum + parseFloat(eq.costo), 0);
+  return total.toFixed(2);
+}
+
+  eliminarEquipo(index: number) {
+    this.equiposAgregados.splice(index, 1);
   }
 }

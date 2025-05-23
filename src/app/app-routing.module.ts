@@ -5,14 +5,17 @@ const routes: Routes = [
  
   {
     path: '',
-    redirectTo: '/menuprincipal/calculoenergia',
+    redirectTo: '/menuprincipal',
     pathMatch: 'full'
   },
   {
     path: 'menuprincipal',
     loadChildren: () => import('./pages/menuprincipal/menuprincipal.module').then( m => m.MenuprincipalPageModule)
   },
-
+{
+    path: 'calculoenergia',
+    loadChildren: () => import('./pages/menuprincipal/calculoenergia/calculoenergia.module').then( m => m.CalculoenergiaPageModule)
+  },
 
   
 ];

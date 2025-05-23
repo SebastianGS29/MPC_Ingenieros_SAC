@@ -36,4 +36,34 @@
     height: auto;
     border-radius: 10px;
   }
-  
+  .tabla-equipos {
+  border-top: 1px solid #ccc;
+  margin-top: 10px;
+}
+
+.tabla-equipos .encabezado {
+  background-color: #f4f4f4;
+  font-size: 14px;
+  border-bottom: 1px solid #ddd;
+}
+
+.tabla-equipos .fila {
+  font-size: 14px;
+  border-bottom: 1px solid #eee;
+  align-items: center;
+}
+
+ion-icon {
+  font-size: 18px;
+}
+
+.total-costo {
+  margin-top: 16px;
+  padding-top: 10px;
+  border-top: 2px solid #ccc;
+}
+
+.total-valor {
+  font-size: 1.4em;
+  color: #0070c9;
+}

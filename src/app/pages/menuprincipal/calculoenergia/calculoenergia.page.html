@@ -1,4 +1,4 @@
-<app-header title="Cálculo de energía"></app-header>
+<app-header title="Cálculo de energía" [mostrarAtras]="true" rutaAtras="/menuprincipal" ></app-header>
 <button id="fallback-focus" style="position: absolute; left: -9999px;" tabindex="-1">Fallback</button>
 <ion-content class="ion-padding">
   
@@ -26,18 +26,34 @@
   </ion-item>
 
   <!-- Lista de equipos agregados dinamico desde back-->
-  <ion-list *ngIf="equiposAgregados.length > 0">
-    <ion-card *ngFor="let eq of equiposAgregados">
-      <ion-card-header>
-        <ion-card-title>{{ eq.nombre }}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p><strong>KWh:</strong> {{ eq.kwh }}</p>
-        <p><strong>KWh/mes:</strong> {{ eq.kwhMes }}</p>
-        <p><strong>Costo aprox.:</strong> S/ {{ eq.costo }}</p>
-      </ion-card-content>
-    </ion-card>
-  </ion-list>
+<ion-grid *ngIf="equiposAgregados.length > 0" class="tabla-equipos">
+  <ion-row class="encabezado ion-text-center">
+    <ion-col><strong>Equipo</strong></ion-col>
+    <ion-col size="2"><strong>KWh</strong></ion-col>
+    <ion-col size="2"><strong>KWh/mes</strong></ion-col>
+    <ion-col size="2"><strong>Costo</strong></ion-col>
+    <ion-col size="2"><strong>Acciones</strong></ion-col>
+  </ion-row>
+
+  <ion-row *ngFor="let eq of equiposAgregados; let i = index" class="fila">
+    <ion-col class="ion-text-center">{{ eq.nombre }}</ion-col>
+    <ion-col size="2" class="ion-text-center">{{ eq.kwh }}</ion-col>
+    <ion-col size="2" class="ion-text-center">{{ eq.kwhMes }}</ion-col>
+    <ion-col size="2" class="ion-text-center">S/ {{ eq.costo }}</ion-col>
+    <ion-col size="2" class="ion-text-center">
+      <ion-icon name="create-outline" color="primary" style="cursor:pointer" (click)="editarEquipo(i)"></ion-icon>
+      &nbsp;
+      <ion-icon name="trash-outline" color="danger" style="cursor:pointer" (click)="eliminarEquipo(i)"></ion-icon>
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+<!-- Total -->
+<div class="ion-padding-horizontal ion-text-end total-costo" *ngIf="equiposAgregados.length > 0">
+  <ion-text color="dark">
+    <h2>Total a pagar: <strong class="total-valor">S/ {{ costoTotal }}</strong></h2>
+  </ion-text>
+</div>
 
   <!-- si no hay equipos -->
   <ion-text *ngIf="equiposAgregados.length === 0" color="medium">

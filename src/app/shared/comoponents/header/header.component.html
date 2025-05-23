@@ -1,7 +1,10 @@
 <ion-header class="ion-no-border">
   <ion-toolbar color="secondary">
+    <ion-buttons slot="start" *ngIf="mostrarAtras">
+      <ion-back-button [defaultHref]="rutaAtras" icon="arrow-back-outline" color="light"></ion-back-button>
+    </ion-buttons>
     <ion-title color="light">
-      <strong>{{title}}</strong>
+      <strong>{{ title }}</strong>
       <div class="admin">MPC Ingenieros S.A.C.</div>
     </ion-title>
   </ion-toolbar>

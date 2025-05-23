@@ -8,6 +8,7 @@ import { MenuprincipalPageRoutingModule } from './menuprincipal-routing.module';
 
 import { MenuprincipalPage } from './menuprincipal.page';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { SharedModule } from 'src/app/shared/shared.module';
     FormsModule,
     IonicModule,
     MenuprincipalPageRoutingModule,
-    SharedModule
+    SharedModule,
+    RouterModule
   ],
   declarations: [MenuprincipalPage]
 })

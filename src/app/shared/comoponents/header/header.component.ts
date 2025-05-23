@@ -1,3 +1,4 @@
+
 import { Component, Input, input, OnInit } from '@angular/core';
 
 @Component({
@@ -9,6 +10,10 @@ import { Component, Input, input, OnInit } from '@angular/core';
 export class HeaderComponent  implements OnInit {
 
 @Input() title!: string;
+
+@Input() mostrarAtras: boolean = false;
+
+@Input() rutaAtras: string = '/';
 
   constructor() { }
 
