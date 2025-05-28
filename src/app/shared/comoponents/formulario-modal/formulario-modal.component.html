@@ -1,32 +1,42 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="secondary">
     <ion-title>{{ equipo }}</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="onCerrar()" fill="clear">
-        <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+      <ion-button (click)="onCerrar()">
+        <ion-icon name="close-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <form [formGroup]="form">
-    <ion-item>
-      <ion-label position="stacked">Cantidad (0–10):</ion-label>
-      <ion-input type="number" formControlName="cantidad"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Potencia Referencial (0–15000):</ion-label>
-      <ion-input type="number" formControlName="potencia"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Horas (0–24):</ion-label>
-      <ion-input type="number" formControlName="horas"></ion-input>
-    </ion-item>
-  <ion-item>
-      <ion-label position="stacked">Días (0–30):</ion-label>
-      <ion-input type="number" formControlName="dias"></ion-input>
-    </ion-item>
-    <ion-button expand="block" class="ion-margin-top" color="secondary" (click)="onAgregar()">Agregar a la Calculadora</ion-button>
-  </form>
+  <ion-card>
+    <ion-card-content>
+
+      <ion-item class="custom-input" lines="none">
+        <ion-label position="floating">Cantidad (0–10)</ion-label>
+        <ion-input type="number" [(ngModel)]="cantidad"></ion-input>
+      </ion-item>
+
+      <ion-item class="custom-input" lines="none">
+        <ion-label position="floating">Potencia Referencial (0–15000)</ion-label>
+        <ion-input type="number" [(ngModel)]="potencia"></ion-input>
+      </ion-item>
+
+      <ion-item class="custom-input" lines="none">
+        <ion-label position="floating">Horas (0–24)</ion-label>
+        <ion-input type="number" [(ngModel)]="horas"></ion-input>
+      </ion-item>
+
+      <ion-item class="custom-input" lines="none">
+        <ion-label position="floating">Días (0–30)</ion-label>
+        <ion-input type="number" [(ngModel)]="dias"></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" color="secondary" (click)="onAgregar()">
+        Agregar a la Calculadora
+      </ion-button>
+
+    </ion-card-content>
+  </ion-card>
 </ion-content>

@@ -1,59 +1,73 @@
-<app-header title="Cálculo de energía" [mostrarAtras]="true" rutaAtras="/menuprincipal" ></app-header>
+<app-header title="Cálculo de energía" [mostrarAtras]="true" rutaAtras="/menuprincipal"></app-header>
 <button id="fallback-focus" style="position: absolute; left: -9999px;" tabindex="-1">Fallback</button>
+
 <ion-content class="ion-padding">
-  
-<!-- Imagen dinámica del ambiente dinamico -->
-<div class="imagen-ambiente-container">
-  <img [src]="imagenAmbiente" alt="Imagen del ambiente" class="imagen-ambiente" />
-</div>
 
-  <!-- Select de ambientes dinamico -->
+  <!-- Contenedor de scroll horizontal -->
+  <div style="display: flex; overflow-x: auto; gap: 16px; padding-bottom: 16px;">
+
+    <!-- Repite la estructura por ambiente -->
+    <div *ngFor="let amb of ambientes" style="min-width: 320px; max-width: 350px; flex: 0 0 auto; border: 1px solid #ccc; border-radius: 12px; padding: 12px;">
+      
+      <img [src]="getImagenAmbiente(amb)" [alt]="amb" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px;" />
+
+      <ion-item lines="none" class="ion-margin-top">
+        <ion-label><strong>{{ amb }}</strong></ion-label>
+      </ion-item>
+
+      <ion-item>
+        <ion-label>Equipo</ion-label>
+        <ion-select placeholder="Selecciona un equipo" (ionChange)="abrirModalConEquipo(amb, $event.detail.value)">
+          <ion-select-option *ngFor="let eq of getEquipos(amb)" [value]="eq">
+            {{ eq.nombre }} ({{ eq.potencia }} W)
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+    </div>
+  </div>
+
+  <!-- Lista de equipos agregados -->
+  <ion-grid *ngIf="equiposAgregados.length > 0" class="tabla-equipos">
+    <ion-row class="encabezado ion-text-center">
+      <ion-col><strong>Equipo</strong></ion-col>
+      <ion-col><strong>Ambiente</strong></ion-col>
+      <ion-col size="2"><strong>KWh</strong></ion-col>
+      <ion-col size="2"><strong>KWh/mes</strong></ion-col>
+      <ion-col size="2"><strong>Costo</strong></ion-col>
+    </ion-row>
+
+    <ion-item-sliding *ngFor="let eq of equiposAgregados; let i = index">
   <ion-item>
-    <ion-label>Ambiente</ion-label>
-    <ion-select [(ngModel)]="ambienteSeleccionado">
-      <ion-select-option *ngFor="let amb of ambientes" [value]="amb">{{ amb }}</ion-select-option>
-    </ion-select>
+    <ion-grid>
+      <ion-row class="fila">
+        <ion-col class="ion-text-center">{{ eq.nombre }}</ion-col>
+        <ion-col class="ion-text-center">{{ eq.ambiente }}</ion-col>
+        <ion-col size="2" class="ion-text-center">{{ eq.kwh }}</ion-col>
+        <ion-col size="2" class="ion-text-center">{{ eq.kwhMes }}</ion-col>
+        <ion-col size="2" class="ion-text-center">S/ {{ eq.costo }}</ion-col>
+        <!--<ion-col size="2" class="ion-text-center"></ion-col    -->
+      </ion-row>
+    </ion-grid>
   </ion-item>
 
-  <!-- Select de equipos dinamico desde back -->
-  <ion-item>
-    <ion-label>Equipo</ion-label>
-    <ion-select placeholder="Selecciona un equipo" (ionChange)="abrirModalConEquipo($event.detail.value)">
-      <ion-select-option *ngFor="let eq of equipos" [value]="eq">
-        {{ eq.nombre }} ({{ eq.potencia }} W)
-      </ion-select-option>
-    </ion-select>
-  </ion-item>
+  <ion-item-options side="end">
+    <ion-item-option color="primary" (click)="editarEquipo(i)">
+      <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+    </ion-item-option>
+    <ion-item-option color="danger" (click)="eliminarEquipo(i)">
+      <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+    </ion-item-option>
+  </ion-item-options>
+</ion-item-sliding>
+  </ion-grid>
 
-  <!-- Lista de equipos agregados dinamico desde back-->
-<ion-grid *ngIf="equiposAgregados.length > 0" class="tabla-equipos">
-  <ion-row class="encabezado ion-text-center">
-    <ion-col><strong>Equipo</strong></ion-col>
-    <ion-col size="2"><strong>KWh</strong></ion-col>
-    <ion-col size="2"><strong>KWh/mes</strong></ion-col>
-    <ion-col size="2"><strong>Costo</strong></ion-col>
-    <ion-col size="2"><strong>Acciones</strong></ion-col>
-  </ion-row>
-
-  <ion-row *ngFor="let eq of equiposAgregados; let i = index" class="fila">
-    <ion-col class="ion-text-center">{{ eq.nombre }}</ion-col>
-    <ion-col size="2" class="ion-text-center">{{ eq.kwh }}</ion-col>
-    <ion-col size="2" class="ion-text-center">{{ eq.kwhMes }}</ion-col>
-    <ion-col size="2" class="ion-text-center">S/ {{ eq.costo }}</ion-col>
-    <ion-col size="2" class="ion-text-center">
-      <ion-icon name="create-outline" color="primary" style="cursor:pointer" (click)="editarEquipo(i)"></ion-icon>
-      &nbsp;
-      <ion-icon name="trash-outline" color="danger" style="cursor:pointer" (click)="eliminarEquipo(i)"></ion-icon>
-    </ion-col>
-  </ion-row>
-</ion-grid>
-
-<!-- Total -->
-<div class="ion-padding-horizontal ion-text-end total-costo" *ngIf="equiposAgregados.length > 0">
-  <ion-text color="dark">
-    <h2>Total a pagar: <strong class="total-valor">S/ {{ costoTotal }}</strong></h2>
-  </ion-text>
-</div>
+  <!-- Total -->
+  <div class="ion-padding-horizontal ion-text-end total-costo" *ngIf="equiposAgregados.length > 0">
+    <ion-text color="dark">
+      <h2>Total a pagar: <strong class="total-valor">S/ {{ totalCosto.toFixed(2) }}</strong></h2>
+    </ion-text>
+  </div>
 
   <!-- si no hay equipos -->
   <ion-text *ngIf="equiposAgregados.length === 0" color="medium">

@@ -12,7 +12,9 @@ export class FormularioModalComponent implements OnInit {
 
   @Input() equipo: string = '';
   @Input() potencia: number = 0;
-
+  @Input() cantidad: number = 1;
+  @Input() horas: number = 1;
+  @Input() dias: number = 30;
   form: FormGroup;
 
   constructor(
