@@ -33,3 +33,13 @@ ion-item {
 ion-button {
   margin-top: 20px;
 }
+
+ion-item.ng-invalid.ng-touched {
+  --highlight-color-focused: var(--ion-color-danger);
+  --border-color: var(--ion-color-danger);
+}
+
+ion-button[disabled] {
+  opacity: 0.5;
+  pointer-events: none;
+}

@@ -10,11 +10,12 @@ import { ModalController } from '@ionic/angular'; // ← importante
 })
 export class FormularioModalComponent implements OnInit {
 
-  @Input() equipo: string = '';
-  @Input() potencia: number = 0;
-  @Input() cantidad: number = 1;
-  @Input() horas: number = 1;
-  @Input() dias: number = 30;
+@Input() equipo: string = '';
+@Input() potencia: number = 0;
+@Input() cantidad: number = 1;
+@Input() horas: number = 1;
+@Input() dias: number = 30;
+
   form: FormGroup;
 
   constructor(
@@ -29,9 +30,15 @@ export class FormularioModalComponent implements OnInit {
     });
   }
 
-  ngOnInit() {
-    this.form.patchValue({ potencia: this.potencia });
-  }
+ ngOnInit() {
+  this.form.patchValue({
+    potencia: this.potencia,
+    cantidad: this.cantidad,
+    horas: this.horas,
+    dias: this.dias
+  });
+}
+
 
   onAgregar() {
     if (this.form.valid) {
