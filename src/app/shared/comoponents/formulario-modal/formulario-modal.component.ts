@@ -22,13 +22,14 @@ export class FormularioModalComponent implements OnInit {
     private fb: FormBuilder,
     private modalCtrl: ModalController // ← importante
   ) {
-    this.form = this.fb.group({
-      cantidad: [1, [Validators.required, Validators.min(1), Validators.max(10)]],
-      potencia: [0, [Validators.required, Validators.min(0), Validators.max(15000)]],
-      horas: [1, [Validators.required, Validators.min(1), Validators.max(24)]],
-      dias: [1, [Validators.required, Validators.min(1), Validators.max(30)]],
-    });
-  }
+   this.form = this.fb.group({
+  equipoNombre: [''], // <- solo se usará si es "Otros"
+  cantidad: [1, [Validators.required, Validators.min(1), Validators.max(10)]],
+  potencia: [0, [Validators.required, Validators.min(0), Validators.max(15000)]],
+  horas: [1, [Validators.required, Validators.min(1), Validators.max(24)]],
+  dias: [1, [Validators.required, Validators.min(1), Validators.max(30)]],
+  });
+ }
 
  ngOnInit() {
   this.form.patchValue({
@@ -36,20 +37,23 @@ export class FormularioModalComponent implements OnInit {
     cantidad: this.cantidad,
     horas: this.horas,
     dias: this.dias
-  });
+  });if (this.equipo === 'Otros') {
+  this.form.get('equipoNombre')?.setValidators([Validators.required, Validators.minLength(3)]);
+}
 }
 
 
-  onAgregar() {
-    if (this.form.valid) {
-      const datos = {
-        equipo: this.equipo,
-        ...this.form.value
-      };
-      document.activeElement && (document.activeElement as HTMLElement).blur();
-      this.modalCtrl.dismiss(datos); // <- devuelve los datos al padre
-    }
+ onAgregar() {
+  if (this.form.valid) {
+    const datos = {
+      equipo: this.equipo === 'Otros' ? this.form.value.equipoNombre : this.equipo,
+      ...this.form.value
+    };
+    document.activeElement && (document.activeElement as HTMLElement).blur();
+    this.modalCtrl.dismiss(datos);
   }
+}
+
 
   onCerrar() {
     

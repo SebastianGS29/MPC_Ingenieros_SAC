@@ -31,7 +31,8 @@ export class CalculoenergiaPage implements OnInit {
       { nombre: 'Computadora portátil', potencia: 65 },
       { nombre: 'Router WiFi', potencia: 12 },
       { nombre: 'Lámpara LED', potencia: 9 },
-      { nombre: 'Reproductor de DVD', potencia: 20 }
+      { nombre: 'Reproductor de DVD', potencia: 20 },
+      { nombre: 'Otros', potencia: 0 },
     ],
     Residencial: [
       { nombre: 'Refrigeradora', potencia: 800 },
@@ -47,7 +48,8 @@ export class CalculoenergiaPage implements OnInit {
       { nombre: 'Jacuzzi', potencia: 3000 },
       { nombre: 'Secadora de ropa', potencia: 3000 },
       { nombre: 'Computadora de escritorio', potencia: 250 },
-      { nombre: 'Impresora láser', potencia: 400 }
+      { nombre: 'Impresora láser', potencia: 400 },
+      { nombre: 'Otros', potencia: 0 },
     ],
     Industrial: [
       { nombre: 'Compresora', potencia: 5000 },
@@ -63,7 +65,8 @@ export class CalculoenergiaPage implements OnInit {
       { nombre: 'Elevador de carga', potencia: 9000 },
       { nombre: 'Generador eléctrico', potencia: 11000 },
       { nombre: 'Lavadora industrial', potencia: 8500 },
-      { nombre: 'Refrigeración industrial', potencia: 9500 }
+      { nombre: 'Refrigeración industrial', potencia: 9500 },
+      { nombre: 'Otros', potencia: 0 },
     ]
   };
 

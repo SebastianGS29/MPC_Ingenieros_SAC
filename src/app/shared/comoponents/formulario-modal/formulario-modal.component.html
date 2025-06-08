@@ -11,6 +11,16 @@
 
 <ion-content class="ion-padding">
   <form [formGroup]="form">
+
+    <!-- Nombre del equipo (solo si es "Otros") -->
+<ion-item *ngIf="equipo === 'Otros'" lines="none">
+  <ion-label position="floating">Nombre del equipo</ion-label>
+  <ion-input type="text" formControlName="equipoNombre"></ion-input>
+</ion-item>
+<ion-text color="danger" *ngIf="equipo === 'Otros' && form.get('equipoNombre')?.touched && form.get('equipoNombre')?.invalid">
+  <small *ngIf="form.get('equipoNombre')?.errors?.['required']">Este campo es obligatorio.</small>
+  <small *ngIf="form.get('equipoNombre')?.errors?.['minlength']">Debe tener al menos 3 caracteres.</small>
+</ion-text>
     <!-- Cantidad -->
     <ion-item class="custom-input" lines="none">
       <ion-label position="floating">Cantidad (1–10)</ion-label>
