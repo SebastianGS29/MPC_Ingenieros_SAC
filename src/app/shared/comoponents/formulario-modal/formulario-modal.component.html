@@ -13,7 +13,7 @@
   <form [formGroup]="form">
 
     <!-- Nombre del equipo (solo si es "Otros") -->
-<ion-item *ngIf="equipo === 'Otros'" lines="none">
+<ion-item  class="custom-input" *ngIf="equipo === 'Otros'" lines="none">
   <ion-label position="floating">Nombre del equipo</ion-label>
   <ion-input type="text" formControlName="equipoNombre"></ion-input>
 </ion-item>

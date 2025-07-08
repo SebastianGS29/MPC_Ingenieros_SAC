@@ -1,7 +1,30 @@
 <app-header title="Menu principal"></app-header>
-<ion-content class="ion-padding">
-<ion-button  expand="block" routerLink="/calculoenergia" color="secondary">
+<ion-content class="ion-padding" [fullscreen]="true">
+  <div class="imagen-ambiente-container-m">
+    <ion-img src="assets/calculo.jpg"
+             alt="Imagen De Calculo De Energia" class="imagen-ambiente-m"
+             width="1300"></ion-img>
+  </div>
+  <ion-button expand="block" routerLink="/calculoenergia" color="secondary">
     Cálculo de Energía
     <ion-icon slot="end" name=""> </ion-icon>
   </ion-button>
+  <div class="imagen-ambiente-container-m">
+    <ion-img src="assets/cables.jpg"
+             alt="Imagen De Seccion De Cables" class="imagen-ambiente-m"
+             width="1300"></ion-img>
+  </div>
+  <ion-button color="secondary" expand="block" [disabled]="true">
+    Sección de Cables
+  </ion-button>
+  <div class="imagen-ambiente-container-m">
+    <ion-img src="assets/llaves.jpg"
+             alt="Imagen De Seccion De Llaves" class="imagen-ambiente-m"
+             width="1300"></ion-img>
+  </div>
+  <div>
+    <ion-button color="secondary" expand="block" [disabled]="true">
+      Sección de Llaves
+    </ion-button>
+  </div>
 </ion-content>
